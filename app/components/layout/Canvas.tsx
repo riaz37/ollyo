@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { useAppStore } from '../store';
-import LightDevice from './LightDevice';
-import FanDevice from './FanDevice';
-import Modal from './Modal';
-import Toast from './Toast';
+import { useAppStore } from '../../store';
+import LightDevice from '../devices/LightDevice';
+import FanDevice from '../devices/FanDevice';
+import Modal from '../ui/Modal';
+import Toast from '../ui/Toast';
 
 export default function Canvas() {
   const { activeDevice, setActiveDevice, savePreset, clearCanvas } = useAppStore();
@@ -58,7 +58,13 @@ export default function Canvas() {
   };
 
   return (
-    <div className="flex-1 relative flex flex-col h-screen bg-[#0f1419]">
+    <div className="flex-1 relative flex flex-col h-screen">
+      {/* Title */}
+      <div className="absolute top-4 left-4 z-10">
+        <h1 className="text-2xl font-semibold text-primary">
+          CanvasHome
+        </h1>
+      </div>
       {/* Top Right Buttons */}
       {activeDevice && (
         <div className="absolute top-4 right-4 z-10 flex gap-3">
@@ -70,7 +76,7 @@ export default function Canvas() {
           </button>
           <button
             onClick={() => setShowModal(true)}
-            className="px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-medium transition-colors"
+            className="px-4 py-2 rounded-lg bg-blue hover:bg-blue text-white font-medium transition-colors"
           >
             Save Preset
           </button>
@@ -78,29 +84,32 @@ export default function Canvas() {
       )}
 
       {/* Canvas Area */}
-      <div
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        onDrop={handleDrop}
-        className={`
-          flex-1 flex items-center justify-center p-8
-          ${isDraggingOver ? 'bg-[#1a2332]' : ''}
-          transition-colors duration-200
-        `}
-      >
-        {activeDevice ? (
-          <div className="animate-in fade-in slide-in-from-bottom-4">
-            {renderDevice()}
-          </div>
-        ) : (
-          <div className="text-center">
-            {isDraggingOver ? (
-              <div className="text-6xl text-blue-500 animate-pulse">+</div>
-            ) : (
-              <p className="text-xl text-gray-500">Drag anything here</p>
-            )}
-          </div>
-        )}
+      <div className="flex-1 flex items-center justify-center mt-20 mb-0 mx-4">
+        <div
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          className={`flex-1 flex items-center justify-center p-8 h-full transition-colors duration-200 rounded-[0.875rem] border-t-2 ${
+            isDraggingOver ? 'bg-secondary-hover' : 'bg-secondary'
+          }`}
+          style={{
+            borderTopColor: 'var(--bg-panel-solid)',
+          }}
+        >
+          {activeDevice ? (
+            <div className="animate-in fade-in slide-in-from-bottom-4 w-full h-full">
+              {renderDevice()}
+            </div>
+          ) : (
+            <div className="text-center">
+              {isDraggingOver ? (
+                <div className="text-6xl text-blue animate-pulse">+</div>
+              ) : (
+                <p className="text-xl text-gray-500">Drag anything here</p>
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Save Preset Modal */}
@@ -123,7 +132,7 @@ export default function Canvas() {
               }
             }}
             placeholder="Name it"
-            className="w-full px-4 py-3 rounded-lg bg-[#0f1419] border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-3 rounded-lg bg-[#0f1419] border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 ring-blue"
             autoFocus
           />
           <p className="text-sm text-gray-400">
@@ -142,7 +151,7 @@ export default function Canvas() {
             <button
               onClick={handleSavePreset}
               disabled={!presetName.trim()}
-              className="px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-2 rounded-lg bg-blue hover:bg-blue text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Save Preset
             </button>

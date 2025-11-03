@@ -19,8 +19,8 @@ export default function Toggle({ checked, onChange, label }: ToggleProps) {
         onClick={() => onChange(!checked)}
         className={`
           relative inline-flex h-6 w-11 items-center rounded-full transition-colors
-          ${checked ? 'bg-blue-500' : 'bg-gray-600'}
-          focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900
+          ${checked ? 'bg-blue' : 'bg-gray-600'}
+          focus:outline-none
         `}
       >
         <span

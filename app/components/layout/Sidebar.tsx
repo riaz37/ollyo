@@ -1,6 +1,7 @@
 'use client';
 
-import { useAppStore, type DeviceType, type Preset } from '../store';
+import Image from 'next/image';
+import { useAppStore, type DeviceType, type Preset } from '../../store';
 
 interface DraggableDeviceProps {
   type: 'light' | 'fan';
@@ -9,19 +10,34 @@ interface DraggableDeviceProps {
 }
 
 function DraggableDevice({ type, icon, label }: DraggableDeviceProps) {
+  const { activeDevice } = useAppStore();
+  const isSelected = activeDevice === type;
+
   const handleDragStart = (e: React.DragEvent) => {
     e.dataTransfer.setData('deviceType', type);
     e.dataTransfer.effectAllowed = 'move';
   };
 
   return (
-    <div
-      draggable
-      onDragStart={handleDragStart}
-      className="flex items-center gap-3 p-3 rounded-lg bg-[#1a1f2e] border border-gray-700 cursor-grab active:cursor-grabbing hover:bg-[#252a3a] transition-colors"
-    >
-      <div className="text-2xl">{icon}</div>
-      <span className="text-gray-200 font-medium">{label}</span>
+    <div className="relative flex items-center">
+      {/* Blue dot indicator when selected */}
+      {isSelected && (
+        <div className="absolute left-0 w-2 h-2 rounded-full -ml-4 z-10" style={{ background: 'var(--color-blue)' }} />
+      )}
+      <div
+        draggable
+        onDragStart={handleDragStart}
+        className={`
+          flex items-center gap-3 p-3 rounded-[0.625rem] cursor-grab active:cursor-grabbing transition-colors duration-200 flex-1
+          ${isSelected
+            ? 'bg-device-selected'
+            : 'bg-[#1a1f2e] border border-gray-700 hover:bg-[#252a3a]'
+          }
+        `}
+      >
+        <div className="w-6 h-6">{icon}</div>
+        <span className="text-gray-200 font-medium">{label}</span>
+      </div>
     </div>
   );
 }
@@ -32,16 +48,23 @@ function PresetItem({ preset }: { preset: Preset }) {
   const getIcon = () => {
     if (preset.deviceType === 'light') {
       return (
-        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.05-.682.097-1H7.903a13.838 13.838 0 01.097 1h4z" />
-        </svg>
+        <Image
+          src="/lighticon.svg"
+          alt="Light"
+          width={20}
+          height={20}
+          className="w-5 h-5"
+        />
       );
     } else {
       return (
-        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M10.5 2a.5.5 0 010 1h-3a.5.5 0 010-1h3zm5 9.5a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" />
-          <path fillRule="evenodd" d="M10 6a4 4 0 100 8 4 4 0 000-8zm-5 4a5 5 0 1110 0 5 5 0 01-10 0z" clipRule="evenodd" />
-        </svg>
+        <Image
+          src="/fanicon.svg"
+          alt="Fan"
+          width={20}
+          height={20}
+          className="w-5 h-5"
+        />
       );
     }
   };
@@ -74,19 +97,26 @@ export default function Sidebar() {
             type="light"
             label="Light"
             icon={
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.05-.682.097-1H7.903a13.838 13.838 0 01.097 1h4z" />
-              </svg>
+              <Image
+                src="/lighticon.svg"
+                alt="Light"
+                width={24}
+                height={24}
+                className="w-6 h-6"
+              />
             }
           />
           <DraggableDevice
             type="fan"
             label="Fan"
             icon={
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10.5 2a.5.5 0 010 1h-3a.5.5 0 010-1h3zm5 9.5a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" />
-                <path fillRule="evenodd" d="M10 6a4 4 0 100 8 4 4 0 000-8zm-5 4a5 5 0 1110 0 5 5 0 01-10 0z" clipRule="evenodd" />
-              </svg>
+              <Image
+                src="/fanicon.svg"
+                alt="Fan"
+                width={24}
+                height={24}
+                className="w-6 h-6"
+              />
             }
           />
         </div>
