@@ -184,16 +184,97 @@ body {
   .hover\:bg-blue:hover {
     background-color: var(--color-blue);
   }
+
+  /* Canvas border top color */
+  .border-top-panel {
+    border-top-color: var(--bg-panel-solid);
+  }
+
+  /* Speech bubble tail (arrow pointing left) */
+  .bubble-tail-left {
+    width: 0;
+    height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-right: 16px solid var(--color-blue);
+  }
+
+  /* Input background */
+  .bg-input {
+    background-color: var(--background);
+  }
+
+  /* Sidebar background */
+  .bg-sidebar {
+    background-color: var(--bg-sidebar);
+  }
+
+  /* Device item background */
+  .bg-device-item {
+    background-color: var(--bg-sidebar);
+  }
+
+  .bg-device-item-hover {
+    background-color: var(--bg-device-hover);
+  }
+
+  /* Modal background */
+  .bg-modal {
+    background-color: var(--bg-sidebar);
+  }
+
+  /* Toast background */
+  .bg-toast {
+    background: rgba(36, 44, 50, 1);
+    background-image: radial-gradient(50% 50% at 20% 50%, rgba(0, 237, 81, 0.12) 0%, rgba(0, 237, 123, 0) 100%);
+  }
+
+  /* Blue dot indicator */
+  .bg-blue-dot {
+    background: var(--color-blue);
+  }
+
+  /* Color swatch - dynamic color will be set via inline style but we can add base styles */
+  .color-swatch-base {
+    cursor: pointer;
+  }
+
+  /* Fan animation - will be applied dynamically via inline style for duration */
+  .fan-spin-animation {
+    animation: fan-spin linear infinite;
+  }
+
+  /* Light glow effect container */
+  .light-glow-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    transition: opacity 300ms;
+  }
+
+  /* Light glow circle */
+  .light-glow-circle {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 9999px;
+    filter: blur(2rem);
+  }
 }
 
 /* Slider thumb indicator styles */
 input[type="range"]::-webkit-slider-thumb {
   background-color: white;
-  box-shadow: 0 0 8px rgba(43, 127, 255, 0.6);
+  box-shadow: 0 0 6px rgba(43, 127, 255, 0.35);
+  border: none;
+  margin-top: -2px;
 }
 
 input[type="range"]::-moz-range-thumb {
   background-color: white;
-  box-shadow: 0 0 8px rgba(43, 127, 255, 0.6);
+  box-shadow: 0 0 6px rgba(43, 127, 255, 0.35);
+  border: none;
 }
 

@@ -32,13 +32,13 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm cursor-pointer"
       onClick={onClose}
     >
       <div
         ref={modalRef}
         onClick={(e) => e.stopPropagation()}
-        className="bg-[#1a1f2e] rounded-lg shadow-2xl w-full max-w-md mx-4 border border-gray-700"
+        className="bg-modal rounded-lg shadow-2xl w-full max-w-md mx-4 border border-gray-700"
       >
         <div className="p-6">
           <h2 className="text-xl font-semibold text-white mb-4">{title}</h2>

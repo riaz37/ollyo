@@ -6,6 +6,7 @@ import LightDevice from '../devices/LightDevice';
 import FanDevice from '../devices/FanDevice';
 import Modal from '../ui/Modal';
 import Toast from '../ui/Toast';
+import Button from '../ui/Button';
 
 export default function Canvas() {
   const { activeDevice, setActiveDevice, savePreset, clearCanvas } = useAppStore();
@@ -68,18 +69,24 @@ export default function Canvas() {
       {/* Top Right Buttons */}
       {activeDevice && (
         <div className="absolute top-4 right-4 z-10 flex gap-3">
-          <button
-            onClick={handleClear}
-            className="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 text-gray-200 font-medium transition-colors"
-          >
+          <Button variant="secondary" onClick={handleClear}>
             Clear
-          </button>
-          <button
-            onClick={() => setShowModal(true)}
-            className="px-4 py-2 rounded-lg bg-blue hover:bg-blue text-white font-medium transition-colors"
-          >
+          </Button>
+          <Button variant="primary" onClick={() => setShowModal(true)}>
             Save Preset
-          </button>
+          </Button>
+        </div>
+      )}
+
+      {/* Bubble pointing to Devices section - positioned relative to sidebar */}
+      {!activeDevice && !isDraggingOver && (
+        <div className="absolute top-[100px] z-20">
+          {/* Speech bubble */}
+          <div className="relative bg-blue text-white px-6 py-4 rounded-lg shadow-lg">
+            <p className="text-lg font-medium whitespace-nowrap">Drag items from here</p>
+            {/* Bubble tail pointing left towards Devices section */}
+            <div className="absolute left-0 top-1/2 -translate-x-full -translate-y-1/2 bubble-tail-left" />
+          </div>
         </div>
       )}
 
@@ -89,25 +96,20 @@ export default function Canvas() {
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
-          className={`flex-1 flex items-center justify-center p-8 h-full transition-colors duration-200 rounded-[0.875rem] border-t-2 ${
+          className={`flex-1 flex items-center justify-center p-8 h-full transition-colors duration-200 rounded-[0.875rem] border-t-2 border-top-panel cursor-pointer ${
             isDraggingOver ? 'bg-secondary-hover' : 'bg-secondary'
           }`}
-          style={{
-            borderTopColor: 'var(--bg-panel-solid)',
-          }}
         >
           {activeDevice ? (
             <div className="animate-in fade-in slide-in-from-bottom-4 w-full h-full">
               {renderDevice()}
             </div>
           ) : (
-            <div className="text-center">
-              {isDraggingOver ? (
+            <>
+              {isDraggingOver && (
                 <div className="text-6xl text-blue animate-pulse">+</div>
-              ) : (
-                <p className="text-xl text-gray-500">Drag anything here</p>
               )}
-            </div>
+            </>
           )}
         </div>
       </div>
@@ -132,29 +134,29 @@ export default function Canvas() {
               }
             }}
             placeholder="Name it"
-            className="w-full px-4 py-3 rounded-lg bg-[#0f1419] border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 ring-blue"
+            className="w-full px-4 py-3 rounded-lg bg-input border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 ring-blue"
             autoFocus
           />
           <p className="text-sm text-gray-400">
             By adding this effect as a preset you can reuse this anytime.
           </p>
           <div className="flex gap-3 justify-end pt-2">
-            <button
+            <Button
+              variant="secondary"
               onClick={() => {
                 setShowModal(false);
                 setPresetName('');
               }}
-              className="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 text-gray-200 font-medium transition-colors"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
+              variant="primary"
               onClick={handleSavePreset}
               disabled={!presetName.trim()}
-              className="px-4 py-2 rounded-lg bg-blue hover:bg-blue text-white font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Save Preset
-            </button>
+            </Button>
           </div>
         </div>
       </Modal>
