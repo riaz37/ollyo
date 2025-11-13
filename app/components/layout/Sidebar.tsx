@@ -1,27 +1,19 @@
 'use client';
 
-import { useAppStore, type Preset } from '../../store';
-import DeviceIcon from '../ui/DeviceIcon';
-import Section from '../ui/Section';
-import EmptyState from '../ui/EmptyState';
-
-interface DraggableDeviceProps {
-  type: 'light' | 'fan';
-  label: string;
-}
+import { useAppStore } from '@/app/store';
+import type { Preset } from '@/app/types/store.types';
+import DeviceIcon from '@/app/components/ui/DeviceIcon';
+import Section from '@/app/components/ui/Section';
+import EmptyState from '@/app/components/ui/EmptyState';
+import { getAllDeviceTypes, getDeviceLabel } from '@/app/config/deviceRegistry';
+import { useDraggableDevice } from '@/app/hooks/useDraggableDevice';
+import type { DraggableDeviceProps } from '@/app/types/device.types';
 
 function DraggableDevice({ type, label }: DraggableDeviceProps) {
-  const { activeDevice } = useAppStore();
-  const isSelected = activeDevice === type;
-
-  const handleDragStart = (e: React.DragEvent) => {
-    e.dataTransfer.setData('deviceType', type);
-    e.dataTransfer.effectAllowed = 'move';
-  };
+  const { isSelected, handleDragStart } = useDraggableDevice(type);
 
   return (
     <div className="relative flex items-center">
-      {/* Blue dot indicator when selected */}
       {isSelected && (
         <div className="absolute left-0 w-2 h-2 rounded-full -ml-4 z-10 bg-blue-dot" />
       )}
@@ -65,18 +57,22 @@ function PresetItem({ preset }: { preset: Preset }) {
 
 export default function Sidebar() {
   const { presets } = useAppStore();
+  const deviceTypes = getAllDeviceTypes();
 
   return (
     <div className="w-[200px] bg-sidebar border-r border-gray-800 flex flex-col h-screen overflow-y-auto">
-      {/* Devices Section */}
       <Section title="Devices" className="p-4 border-b border-gray-800">
         <div className="space-y-2">
-          <DraggableDevice type="light" label="Light" />
-          <DraggableDevice type="fan" label="Fan" />
+          {deviceTypes.map((type) => (
+            <DraggableDevice
+              key={type}
+              type={type}
+              label={getDeviceLabel(type)}
+            />
+          ))}
         </div>
       </Section>
 
-      {/* Saved Presets Section */}
       <Section title="Saved Presets" className="flex-1 p-4">
         {presets.length === 0 ? (
           <EmptyState message="No presets saved yet" />

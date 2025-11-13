@@ -1,9 +1,6 @@
 'use client';
 
-interface SectionHeaderProps {
-  title: string;
-  className?: string;
-}
+import type { SectionHeaderProps } from '@/app/types/ui.types';
 
 export default function SectionHeader({ title, className = '' }: SectionHeaderProps) {
   return (

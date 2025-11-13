@@ -1,9 +1,6 @@
 'use client';
 
-interface EmptyStateProps {
-  message: string;
-  className?: string;
-}
+import type { EmptyStateProps } from '@/app/types/ui.types';
 
 export default function EmptyState({ message, className = '' }: EmptyStateProps) {
   return (

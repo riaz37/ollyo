@@ -1,14 +1,7 @@
 'use client';
 
-import { ReactNode } from 'react';
 import Toggle from './Toggle';
-
-interface ControlRowProps {
-  label: string;
-  checked: boolean;
-  onToggle: (checked: boolean) => void;
-  className?: string;
-}
+import type { ControlRowProps } from '@/app/types/ui.types';
 
 export default function ControlRow({ label, checked, onToggle, className = '' }: ControlRowProps) {
   return (

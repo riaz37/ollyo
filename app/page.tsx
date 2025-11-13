@@ -1,7 +1,7 @@
 'use client';
 
-import Sidebar from './components/layout/Sidebar';
-import Canvas from './components/layout/Canvas';
+import Sidebar from '@/app/components/layout/Sidebar';
+import Canvas from '@/app/components/layout/Canvas';
 
 export default function Home() {
   return (

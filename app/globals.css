@@ -51,7 +51,6 @@ body {
   overflow: hidden;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -69,7 +68,6 @@ body {
   background: var(--border-gray-light);
 }
 
-/* Animation keyframes */
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -119,7 +117,6 @@ body {
   }
 }
 
-/* Animation utility classes */
 .animate-in {
   animation: fade-in 0.3s ease-out;
 }
@@ -185,7 +182,6 @@ body {
     background-color: var(--color-blue);
   }
 
-  /* Canvas border top color */
   .border-top-panel {
     border-top-color: var(--bg-panel-solid);
   }
@@ -199,17 +195,14 @@ body {
     border-right: 16px solid var(--color-blue);
   }
 
-  /* Input background */
   .bg-input {
     background-color: var(--background);
   }
 
-  /* Sidebar background */
   .bg-sidebar {
     background-color: var(--bg-sidebar);
   }
 
-  /* Device item background */
   .bg-device-item {
     background-color: var(--bg-sidebar);
   }
@@ -218,18 +211,15 @@ body {
     background-color: var(--bg-device-hover);
   }
 
-  /* Modal background */
   .bg-modal {
     background-color: var(--bg-sidebar);
   }
 
-  /* Toast background */
   .bg-toast {
     background: rgba(36, 44, 50, 1);
     background-image: radial-gradient(50% 50% at 20% 50%, rgba(0, 237, 81, 0.12) 0%, rgba(0, 237, 123, 0) 100%);
   }
 
-  /* Blue dot indicator */
   .bg-blue-dot {
     background: var(--color-blue);
   }
@@ -264,7 +254,6 @@ body {
   }
 }
 
-/* Slider thumb indicator styles */
 input[type="range"]::-webkit-slider-thumb {
   background-color: white;
   box-shadow: 0 0 6px rgba(43, 127, 255, 0.35);

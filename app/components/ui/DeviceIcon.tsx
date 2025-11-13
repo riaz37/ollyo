@@ -1,12 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-
-interface DeviceIconProps {
-  type: 'light' | 'fan';
-  size?: 20 | 24;
-  className?: string;
-}
+import type { DeviceIconProps } from '@/app/types/ui.types';
 
 const iconMap = {
   light: '/lighticon.svg',

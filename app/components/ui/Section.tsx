@@ -1,14 +1,7 @@
 'use client';
 
-import { ReactNode } from 'react';
 import SectionHeader from './SectionHeader';
-
-interface SectionProps {
-  title: string;
-  children: ReactNode;
-  className?: string;
-  headerClassName?: string;
-}
+import type { SectionProps } from '@/app/types/ui.types';
 
 export default function Section({ title, children, className = '', headerClassName = '' }: SectionProps) {
   return (

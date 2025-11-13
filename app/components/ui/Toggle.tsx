@@ -1,10 +1,6 @@
 'use client';
 
-interface ToggleProps {
-  checked: boolean;
-  onChange: (checked: boolean) => void;
-  label?: string;
-}
+import type { ToggleProps } from '@/app/types/ui.types';
 
 export default function Toggle({ checked, onChange, label }: ToggleProps) {
   return (

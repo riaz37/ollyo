@@ -1,11 +1,6 @@
 'use client';
 
-import { ReactNode } from 'react';
-
-interface DeviceVisualProps {
-  children: ReactNode;
-  className?: string;
-}
+import type { DeviceVisualProps } from '@/app/types/device.types';
 
 export default function DeviceVisual({ children, className = '' }: DeviceVisualProps) {
   return (

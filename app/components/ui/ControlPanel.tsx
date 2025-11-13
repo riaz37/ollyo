@@ -1,11 +1,6 @@
 'use client';
 
-import { ReactNode } from 'react';
-
-interface ControlPanelProps {
-  children: ReactNode;
-  className?: string;
-}
+import type { ControlPanelProps } from '@/app/types/ui.types';
 
 export default function ControlPanel({ children, className = '' }: ControlPanelProps) {
   return (

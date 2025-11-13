@@ -1,13 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-
-interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  title: string;
-  children: React.ReactNode;
-}
+import type { ModalProps } from '@/app/types/ui.types';
 
 export default function Modal({ isOpen, onClose, title, children }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);

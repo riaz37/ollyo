@@ -2,13 +2,7 @@
 
 import { useEffect } from 'react';
 import Image from 'next/image';
-
-interface ToastProps {
-  message: string;
-  type?: 'success' | 'error';
-  onClose: () => void;
-  duration?: number;
-}
+import type { ToastProps } from '@/app/types/ui.types';
 
 export default function Toast({
   message,
@@ -24,7 +18,6 @@ export default function Toast({
   return (
     <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 animate-in slide-in-from-top-5">
       <div className="px-4 py-3 rounded-lg shadow-lg text-white font-medium flex items-center gap-2 bg-toast">
-        {/* Tick mark */}
         <Image
           src="/check.svg"
           alt="check"

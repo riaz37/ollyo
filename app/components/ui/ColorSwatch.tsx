@@ -1,12 +1,6 @@
 'use client';
 
-interface ColorSwatchProps {
-  color: string;
-  isSelected: boolean;
-  onClick: () => void;
-  ariaLabel: string;
-  className?: string;
-}
+import type { ColorSwatchProps } from '@/app/types/ui.types';
 
 export default function ColorSwatch({
   color,

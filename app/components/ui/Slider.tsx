@@ -1,13 +1,6 @@
 'use client';
 
-interface SliderProps {
-  value: number;
-  onChange: (value: number) => void;
-  min?: number;
-  max?: number;
-  label?: string;
-  showPercentage?: boolean;
-}
+import type { SliderProps } from '@/app/types/ui.types';
 
 export default function Slider({
   value,
